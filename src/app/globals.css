@@ -3,16 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 34, 34, 34;
+  --background-top-rgb: 255, 223, 186;
+  --background-bottom-rgb: 255, 247, 227;
+  --primary-color: #ff6b6b;
+  --secondary-color: #ffe66d;
+  --tertiary-color: #4ecdc4;
+  --accent-color: #76c7c0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background-top-rgb: 72, 72, 72;
+    --background-bottom-rgb: 48, 48, 48;
+    --primary-color: #ff6b6b;
+    --secondary-color: #ffe66d;
+    --tertiary-color: #4ecdc4;
+    --accent-color: #76c7c0;
   }
 }
 
@@ -20,14 +28,82 @@ body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-top-rgb)),
+      rgb(var(--background-bottom-rgb))
+    );
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+h1, h2 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+label {
+  color: var(--tertiary-color);
+}
+
+input, select, button {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  width: 100%;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: darken(var(--primary-color), 10%);
+}
+
+form {
+  max-width: 500px;
+  margin: auto;
+  padding: 1rem;
+  background-color: var(--background-bottom-rgb);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+p {
+  color: var(--foreground-rgb);
+}
+
+.section {
+  padding: 2rem 0;
+}
+
+.header {
+  background-color: var(--accent-color);
+  padding: 2rem 0;
+}
+
+.header img {
+  max-width: 150px;
+  margin: auto;
+  display: block;
+}
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
 }
