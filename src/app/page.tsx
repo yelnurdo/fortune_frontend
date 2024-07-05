@@ -36,7 +36,7 @@ export default function Home() {
     e.preventDefault();
 
     try {
-      const formattedBirthdate = new Date(birthdate).toISOString();
+      const formattedBirthdate = new Date(birthdate).toISOString().split('T')[0];  // Format birthdate to YYYY-MM-DD
 
       const userResponse = await axios.post<UserResponse>('https://fortunebackend-production.up.railway.app/users/', {
         name,
