@@ -38,7 +38,7 @@ export default function Home() {
     try {
       const formattedBirthdate = new Date(birthdate).toISOString();
 
-      const userResponse = await axios.post<UserResponse>(`${process.env.NEXT_PUBLIC_API_URL}/users/`, {
+      const userResponse = await axios.post<UserResponse>('https://fortunebackend-production.up.railway.app/users/', {
         name,
         birthdate: formattedBirthdate,
         location,
@@ -48,7 +48,7 @@ export default function Home() {
 
       const userId = userResponse.data.id;
 
-      const predictionResponse = await axios.post<PredictionResponse>(`${process.env.NEXT_PUBLIC_API_URL}/predictions/`, {
+      const predictionResponse = await axios.post<PredictionResponse>('https://fortunebackend-production.up.railway.app/predictions/', {
         user_id: userId,
         type: predictionType,
         additional_info: { interests }
@@ -132,7 +132,7 @@ export default function Home() {
           <div className="grid grid-cols-4 gap-4">
             {prediction.result?.images && prediction.result.images.map((image, index) => (
               <div key={index}>
-                <Image src={`${process.env.NEXT_PUBLIC_API_URL}${image}`} alt={`Prediction Image ${index + 1}`} width={500} height={500} />
+                <Image src={`https://fortunebackend-production.up.railway.app${image}`} alt={`Prediction Image ${index + 1}`} width={500} height={500} />
               </div>
             ))}
           </div>
@@ -141,7 +141,7 @@ export default function Home() {
             {prediction.result?.audio && (
               <div>
                 <audio controls>
-                  <source src={`${process.env.NEXT_PUBLIC_API_URL}${prediction.result.audio}`} type="audio/mpeg" />
+                  <source src={`https://fortunebackend-production.up.railway.app${prediction.result.audio}`} type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
               </div>
