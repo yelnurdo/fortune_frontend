@@ -4,6 +4,9 @@ import { useState, FormEvent } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 
+// Define the API base URL as a constant
+const API_BASE_URL = 'https://fortunebackend-production.up.railway.app';
+
 interface UserResponse {
   id: number;
   name: string;
@@ -38,7 +41,7 @@ export default function Home() {
     try {
       const formattedBirthdate = new Date(birthdate).toISOString().split('T')[0];  // Format birthdate to YYYY-MM-DD
 
-      const userResponse = await axios.post<UserResponse>('https://fortunebackend-production.up.railway.app/users/', {
+      const userResponse = await axios.post<UserResponse>(`${API_BASE_URL}/users/`, {
         name,
         birthdate: formattedBirthdate,
         location,
@@ -48,7 +51,7 @@ export default function Home() {
 
       const userId = userResponse.data.id;
 
-      const predictionResponse = await axios.post<PredictionResponse>('https://fortunebackend-production.up.railway.app/predictions/', {
+      const predictionResponse = await axios.post<PredictionResponse>(`${API_BASE_URL}/predictions/`, {
         user_id: userId,
         type: predictionType,
         additional_info: { interests }
@@ -132,7 +135,7 @@ export default function Home() {
           <div className="grid grid-cols-4 gap-4">
             {prediction.result?.images && prediction.result.images.map((image, index) => (
               <div key={index}>
-                <Image src={`https://fortunebackend-production.up.railway.app${image}`} alt={`Prediction Image ${index + 1}`} width={500} height={500} />
+                <Image src={`${API_BASE_URL}${image}`} alt={`Prediction Image ${index + 1}`} width={500} height={500} />
               </div>
             ))}
           </div>
@@ -141,7 +144,7 @@ export default function Home() {
             {prediction.result?.audio && (
               <div>
                 <audio controls>
-                  <source src={`https://fortunebackend-production.up.railway.app${prediction.result.audio}`} type="audio/mpeg" />
+                  <source src={`${API_BASE_URL}${prediction.result.audio}`} type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
               </div>
