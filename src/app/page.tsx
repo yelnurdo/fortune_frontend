@@ -61,11 +61,6 @@ export default function Home() {
     }
   };
 
-  const normalizeImageUrl = (url: string) => {
-    // Remove double "/static/" to single "/static/"
-    return url.replace('//static/', '/static/');
-  };
-
   return (
     <div>
       <header className="header">
@@ -137,7 +132,7 @@ export default function Home() {
           <div className="grid grid-cols-4 gap-4">
             {prediction.result?.images && prediction.result.images.map((image, index) => (
               <div key={index}>
-                <Image src={normalizeImageUrl(`https://fortunebackend-production.up.railway.app${image}`)} alt={`Prediction Image ${index + 1}`} width={500} height={500} />
+                <Image src={`https://fortunebackend-production.up.railway.app${image}`} alt={`Prediction Image ${index + 1}`} width={500} height={500} />
               </div>
             ))}
           </div>
